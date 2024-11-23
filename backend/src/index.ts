@@ -139,11 +139,11 @@ if (process.env.NODE_ENV === 'production') {
     const __filename = fileURLToPath(import.meta.url);
     const __dirname = dirname(__filename); // Get the current directory of the file
 
-    app.use(express.static(join(__dirname, '../client/build'))); // Serve static files from the React app
+    app.use(express.static(join(__dirname, '../dist'))); // Serve static files from the React app
 
     // The "catchall" handler: for any request that doesn't match one above, send back index.html.
     app.get('*', (req, res) => {
-        res.sendFile(join(__dirname, '../client/build/index.html')); // Serve index.html for unknown routes
+        res.sendFile(join(__dirname, '../dist/index.html')); // Serve index.html for unknown routes
     });
 }
 
