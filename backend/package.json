@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "nodemon --watch src/** --ext ts,json --ignore src/**/*.spec.ts --exec tsx src/index.ts",
     "build": "tsc",
-    "start": "node ./dist/index.js"
+    "start": "node ./dist/index.js",
+    "serve": "vite preview"
   },
   "keywords": [],
   "author": "",
@@ -41,6 +42,7 @@
     "@types/passport": "^1.0.17",
     "@types/passport-google-oauth20": "^2.0.16",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "vite": "^5.4.11"
   }
 }
