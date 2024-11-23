@@ -6,7 +6,8 @@ import routes from './routes/index.js'; // Importing routes from the routes fold
 import session from 'express-session'; // Importing session management middleware
 import passport from 'passport'; // Passport for handling authentication
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'; // Google OAuth strategy for login
-import path from 'path'; // Path module for handling file paths
+import { fileURLToPath } from 'url'; // Import for handling file URLs in ES modules
+import { dirname, join } from 'path'; // Path utilities for file path manipulation
 
 // Initialize environment variables
 dotenv.config();
@@ -135,11 +136,14 @@ app.get('/user', (req, res) => {
 
 // Serve static files from the React app
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, '../client/build'))); // Serve static files from the React app
+    const __filename = fileURLToPath(import.meta.url);
+    const __dirname = dirname(__filename); // Get the current directory of the file
+
+    app.use(express.static(join(__dirname, '../client/build'))); // Serve static files from the React app
 
     // The "catchall" handler: for any request that doesn't match one above, send back index.html.
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '../client/build/index.html'));
+        res.sendFile(join(__dirname, '../client/build/index.html')); // Serve index.html for unknown routes
     });
 }
 
